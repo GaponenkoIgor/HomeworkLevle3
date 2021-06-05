@@ -1,9 +1,8 @@
 package com.company.lesson1;
 
-public class Orange extends Fruit{
+public class Orange extends Fruit {
 
-    @Override
-    double getWeigth() {
-        return 1.5;
+    public Orange() {
+        weight = 1.5f;
     }
 }

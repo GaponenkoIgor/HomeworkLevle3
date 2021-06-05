@@ -4,21 +4,33 @@ import java.util.ArrayList;
 
 public class Box<T extends Fruit> {
 
+    private ArrayList<T> storage = new ArrayList<T>();
 
-
-    ArrayList<T> box = new ArrayList<>();
-
-    public void addFruit(T fruit, int amount) {
-        for (int i = 0; i < amount; i++) {
-            box.add(fruit);
-        }
-        System.out.println(fruit.getWeigth());
+    public void addFruit(T fruit){
+        storage.add(fruit);
     }
 
-    public boolean compare(T fruit, T fruit2){
-        if(fruit.getWeigth()* box.size()== fruit2.getWeigth()*box.size()) return true;
-        return false;
+    public int getSizeBox(){
+        return storage.size();
     }
+
+    public float getWeight(){
+        float boxWeight = 0;
+        boxWeight = this.getSizeBox() * T.getFruitWeight();
+        return boxWeight;
+    }
+
+    public boolean compare(Box box){
+        return box.getWeight() == this.getWeight();
+    }
+
+    public void pourFruit(Box box){
+        box.storage.addAll(this.storage);
+        this.storage.clear();
+    }
+
+
+
 
 
 }

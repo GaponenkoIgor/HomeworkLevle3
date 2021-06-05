@@ -1,7 +1,9 @@
 package com.company.lesson1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.company.lesson1.Apple;
+import com.company.lesson1.Box;
+import com.company.lesson1.Orange;
+import java.util.*;
 
 public class Example {
     public static <T> void change(T[] obj, int n1, int n2) {
@@ -20,18 +22,50 @@ public class Example {
         System.out.println("task_1");
         Integer arr1[] = {1, 2, 3, 4, 5, 6, 7};
         String arr2[] = {"A", "B", "C"};
-        change(arr1, 1, 4);
-        change(arr2, 1, 2);
+        change(arr1, 0, 4);
+        change(arr2, 0, 2);
+
         System.out.println("");
+
         System.out.println("task_2");
         arraylist(arr1);
+
         System.out.println("");
+
         System.out.println("task_3");
-        Box box = new Box();
+
+        Box<Orange> orangeBox1 = new Box<>();
+        orangeBox1.addFruit(new Orange());
+        orangeBox1.addFruit(new Orange());
+        orangeBox1.addFruit(new Orange());
+        System.out.println("Первая коробка с апельсинами - " + orangeBox1.getWeight());
+
+        Box<Orange> orangeBox2 = new Box<>();
+        orangeBox2.addFruit(new Orange());
+        orangeBox1.pourFruit(orangeBox2);
+        System.out.println("Вторая коробка с апельсинами - " + orangeBox2.getWeight());
+        System.out.println("Первая коробка после пересыпания - " + orangeBox1.getWeight());
+
         Box<Apple> appleBox = new Box<>();
-        Box<Orange> orangeBox = new Box();
-        appleBox.addFruit(new Apple(), 12);
-        orangeBox.addFruit(new Orange(), 8);
-        System.out.println(box.compare(new Apple(), new Orange()));
+        appleBox.addFruit(new Apple());
+        appleBox.addFruit(new Apple());
+        appleBox.addFruit(new Apple());
+        System.out.println("Коробка с яблоками - " + appleBox.getWeight());
+
+        System.out.println("Равен ли вес коробок ? - " + appleBox.compare(orangeBox1));
+    }
+
+    public static <T> T switchArrayItem(List<T> array) {
+        if ((Objects.nonNull(array)) & (array.size() > 1)) {
+            T temp = array.get(1);
+            array.set(1, array.get(0));
+            array.set(0, temp);
+        }
+        return (T) array;
+    }
+
+    public static <T> ArrayList<T> convertMasToArrayList(T mas) {
+        ArrayList<T> result = new ArrayList<T>(Collections.unmodifiableList(Arrays.asList(mas)));
+        return result;
     }
 }
